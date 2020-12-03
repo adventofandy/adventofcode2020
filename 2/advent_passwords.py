@@ -7,7 +7,9 @@ def parse_password_line(line):
     print(line)
     match = regex.search(line)
     
-    result_dict = match.groupdict() 
+    result_dict = match.groupdict()
+    result_dict["min"] = int(result_dict["min"])
+    result_dict["max"] = int(result_dict["max"])
     print(result_dict)
     return result_dict
 
