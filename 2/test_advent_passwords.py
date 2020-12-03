@@ -32,3 +32,14 @@ def test_parse_password_line_2(test_passwords):
     parsed = advent_passwords.parse_password_line(p)
     assert parsed == good_parse_2
 
+def test_is_password_valid_0():
+    assert advent_passwords.is_password_valid(good_parse_0, 1)
+    assert advent_passwords.is_password_valid(good_parse_0, 2)
+
+def test_is_password_valid_1():
+    assert not advent_passwords.is_password_valid(good_parse_1, 1)
+    assert not advent_passwords.is_password_valid(good_parse_1, 2)
+
+def test_is_password_valid_2():
+    assert advent_passwords.is_password_valid(good_parse_2, 1)
+    assert not advent_passwords.is_password_valid(good_parse_2, 2)
