@@ -10,7 +10,7 @@ PASSDICT3 = {'hcl':'#ae17e1', 'iyr':'2013', 'eyr':'2024', 'ecl':'brn', 'pid':'76
 PASS4 = 'hcl:#cfa07d eyr:2025 pid:166559648\niyr:2011 ecl:brn hgt:59in\n'
 PASSDICT4 = {'hcl':'#cfa07d', 'eyr':'2025', 'pid':'166559648','iyr':'2011', 'ecl':'brn', 'hgt':'59in'}
 TESTFILE1 = "test_passports_pt1.txt"
-NUMPASS = 4
+NUMPASS1 = 4
 
 @pytest.fixture
 def test_file():
@@ -23,28 +23,16 @@ def test_file():
 
 def test_num_passports(test_file):
     passports = passport.separate_passports(test_file)
-    assert len(passports) == NUMPASS
+    assert len(passports) == NUMPASS1
 
-def test_parse_passport1():
-    assert passport.parse_passport(PASS1) == PASSDICT1
+@pytest.mark.parametrize("inp,exp",
+        [(PASS1, PASSDICT1), (PASS2, PASSDICT2), (PASS3, PASSDICT3),
+        (PASS4, PASSDICT4)])
+def test_parse_passport_param(inp, exp):
+    assert passport.parse_passport(inp) == exp
 
-def test_parse_passport2():
-    assert passport.parse_passport(PASS2) == PASSDICT2
-
-def test_parse_passport3():
-    assert passport.parse_passport(PASS3) == PASSDICT3
-
-def test_parse_passport4():
-    assert passport.parse_passport(PASS4) == PASSDICT4
-
-def test_valid_passport1():
-    assert passport.is_valid_passport(PASSDICT1)
-
-def test_valid_passport2():
-    assert not passport.is_valid_passport(PASSDICT2)
-
-def test_valid_passport3():
-    assert passport.is_valid_passport(PASSDICT3)
-
-def test_valid_passport4():
-    assert not passport.is_valid_passport(PASSDICT4)
+@pytest.mark.parametrize("inp_valid, exp_valid",
+        [(PASSDICT1, True), (PASSDICT2, False), (PASSDICT3, True),
+        (PASSDICT4, False)])
+def test_valid_passport(inp_valid, exp_valid):
+    assert passport.is_valid_passport(inp_valid) == exp_valid
