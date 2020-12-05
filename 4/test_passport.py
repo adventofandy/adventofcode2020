@@ -9,13 +9,13 @@ PASS3 = 'hcl:#ae17e1 iyr:2013\neyr:2024\necl:brn pid:760753108 byr:1931\nhgt:179
 PASSDICT3 = {'hcl':'#ae17e1', 'iyr':'2013', 'eyr':'2024', 'ecl':'brn', 'pid':'760753108', 'byr':'1931', 'hgt':'179cm'}
 PASS4 = 'hcl:#cfa07d eyr:2025 pid:166559648\niyr:2011 ecl:brn hgt:59in\n'
 PASSDICT4 = {'hcl':'#cfa07d', 'eyr':'2025', 'pid':'166559648','iyr':'2011', 'ecl':'brn', 'hgt':'59in'}
-TESTFILE = "test_passports.txt"
+TESTFILE1 = "test_passports_pt1.txt"
 NUMPASS = 4
 
 @pytest.fixture
 def test_file():
     lines = None
-    with open(TESTFILE) as f:
+    with open(TESTFILE1) as f:
         lines = f.read()
     
     assert lines
